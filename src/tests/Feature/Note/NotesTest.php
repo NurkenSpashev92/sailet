@@ -12,10 +12,27 @@ test('create notes', function () {
 });
 
 test('get note', function () {
-    Note::factory()->create();
+    Note::factory()->create(['id' => 6]);
 
-    $response = $this->get('/api/notes/1/');
-    dd($response);
+    $response = $this->get('/api/notes/6');
     $response->assertStatus(200);
 });
 
+test('update note', function () {
+    $note = Note::factory()->create();
+
+    $newData = [
+        'title' => 'Updated Title',
+        'content' => 'Updated Content',
+        'draft' => true,
+    ];
+
+    $response = $this->put('/api/notes/' . $note->id, $newData);
+
+    $response->assertStatus(200);
+
+    $updatedNote = Note::find($note->id);
+    $this->assertEquals($newData['title'], $updatedNote->title);
+    $this->assertEquals($newData['content'], $updatedNote->content);
+    $this->assertEquals($newData['draft'], $updatedNote->draft);
+});
