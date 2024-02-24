@@ -2,6 +2,7 @@
 
 Need download docker-compose and make bash
 
+site: http://localhost:8000/
 
 ## Start project
 ```bash
