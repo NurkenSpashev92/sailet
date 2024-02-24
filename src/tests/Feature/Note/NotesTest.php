@@ -36,3 +36,11 @@ test('update note', function () {
     $this->assertEquals($newData['content'], $updatedNote->content);
     $this->assertEquals($newData['draft'], $updatedNote->draft);
 });
+
+test('delete note', function () {
+    $note = Note::factory()->create();
+
+    $response = $this->delete('/api/notes/' . $note->id);
+
+    $response->assertStatus(204);
+});
