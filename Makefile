@@ -58,3 +58,6 @@ mysql: ## Run bash inside app_mysql container
 
 route: ## Show all routes
 	${APP} php artisan route:list
+
+test: ## Run all tests
+	${APP} ./vendor/bin/pest
